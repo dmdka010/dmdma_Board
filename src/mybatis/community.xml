@@ -2,16 +2,28 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper>
-	<insert id="">
-		
+<mapper namespace="community">
+<!-- CommunityVO 만들기
+1. 메인글 글 쓰기 : insert
+2. 메인글 글 수정 : update
+3. 메인글 글 삭제 : delete
+4. 메인글 글 보기 : select
+-->
+	<insert id="insert" parameterType="vo.CommunityVO">
+		INSERT INTO COMMUNITY
+		(IDX, WRITER, TITLE, CONTENT, READCOUNT, CREATEDAT, IP, COMMENTCOUNT)
+		VALUES(community_idx_seq.nextval, #{writer}, #{title}, #{content}, #{readCount}, SYSDATE, #{ip}, #{commentCount})
 	</insert>
-	<update id="">
-		
+	<update id="update" parameterType="vo.CommunityVO">
+		UPDATE COMMUNITY
+		SET CONTENT=#{content}
+		WHERE IDX=#{idx}
 	</update>
-	<select id="">
-		
+	<delete id="delete" parameterType="_int">
+		DELETE FROM COMMUNITY
+		WHERE IDX=#{idx}
+	</delete>
+	<select id="select" resultType="vo.CommunityVO">
+		SELECT * FROM COMMUNITY
 	</select>
-	
-	
 </mapper>
